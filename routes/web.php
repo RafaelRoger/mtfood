@@ -36,6 +36,7 @@ Route::prefix('admin')->group(function () {
         Route::post('stock-in-update/{id}', 'updateProduct')->name('stock.in.update');
         Route::get('stock-in-delete/{id}', 'deleteEntry')->name('stock.in.delete');
         Route::get('stock-out', 'indexStockOut')->name('stock.out');
+        Route::post('stock-out', 'deduce')->name('stock.out');
         Route::get('stock-in-view', 'stockInView')->name('stock.in.view');
         Route::get('stock-out-view', 'stockOutView')->name('stock.out.view');
     });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Entry;
+use App\Models\Outlet;
 use Illuminate\Http\Request;
 
 class StockController extends Controller
@@ -21,6 +22,8 @@ class StockController extends Controller
             'price'    => 'required|numeric',
         ]);
 
+        if ($request->quantity < 1) return back()->withErrors('Quantidade de produtos deve ser maior que zero!');
+
         $stockInObject = new Entry;
         $stockInObject->product_name = $request->name;
         $stockInObject->quantity = $request->quantity;
@@ -37,7 +40,7 @@ class StockController extends Controller
 
     public function stockInView() {
 
-        $entries = Entry::get();
+        $entries = Entry::where('quantity', '>', 0)->get();
         return view('pages.stock-in-view', [
             'entries' => $entries
         ]);
@@ -75,11 +78,45 @@ class StockController extends Controller
     }
 
     public function indexStockOut() {
-        return view('pages.stock-out');
+        $entries = Entry::where('quantity', '>', 0)->get();
+
+        return view('pages.stock-out', [
+            'entries' => $entries
+        ]);
+    }
+
+    public function deduce( Request $request ) {
+
+        $request->validate([
+            'product' => 'required',
+            'quantity' => 'required|numeric'
+        ]);
+
+        if ($request->quantity < 1) return back()->withErrors('Quantidade de produtos a deduzir deve ser maior que 0');
+        $entry = Entry::findOrFail($request->product);
+
+        if ($entry->quantity < $request->quantity) return back()->withErrors('Quantidade requerida indisponivel!');
+
+        $outlet = new Outlet;
+        $outlet->quantity = $request->quantity;
+        $outlet->leftover = $entry->quantity - $request->quantity;
+        $outlet->entry_id = $entry->id;
+        $outlet->user_id = 1;
+        if ($outlet->save()) {
+            $entry->quantity = $entry->quantity - $request->quantity;
+            $entry->save();
+            return back()->with('message', 'Saída registrada com sucesso.');
+        }
+
+        return back()->withErrors('Ocorreu um problema ao registar a saída!');
     }
 
     public function stockOutView() {
-        return view('pages.stock-out-view');
+        $outlets = Outlet::with('entry')->get();
+
+        return view('pages.stock-out-view', [
+            'outlets' => $outlets
+        ]);
     }
 
 }

@@ -23,22 +23,27 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Produto</th>
-                                        <th>Quantidade</th>
+                                        <th>Q. Retirada</th>
+                                        <th>Q. remanescente</th>
+                                        <th>Preço Unitário</th>
                                         <th>Preço total de saída</th>
                                         <th>Fornecedor</th>
                                         <th>Data de saída</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach( $outlets as $key => $outlet )
                                     <tr>
-                                        <td>1</td>
-                                        <td>Saco de Arroz</td>
-                                        <td>5</td>
-                                        <td>1250</td>
-                                        <td>Sasseca</td>
-                                        <td>10/01/2024</td>
+                                        <td>{{ __($key + 1) }}</td>
+                                        <td>{{ __($outlet->entry->product_name) }}</td>
+                                        <td>{{ __($outlet->quantity) }}</td>
+                                        <td>{{ __($outlet->leftover) }}</td>
+                                        <td>{{ __($outlet->entry->price) }}</td>
+                                        <td>{{ __($outlet->quantity * $outlet->entry->price) }}</td>
+                                        <td>{{ __($outlet->entry->supplier ?? '-') }}</td>
+                                        <td>{{ __($outlet->entry->entry_date) }}</td>
                                     </tr>
-
+                                    @endforeach
                                 </tbody>
 
 
