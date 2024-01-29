@@ -43,6 +43,28 @@ class StockController extends Controller
         ]);
     }
 
+    public function updateProduct( Request $request, $id ) {
+
+        $request->validate([
+            'name'     => 'required',
+            'quantity' => 'required|numeric',
+            'data_in'  => 'required',
+            'price'    => 'required|numeric',
+        ]);
+
+        $stockInObject = Entry::findOrFail($id);
+        $stockInObject->product_name = $request->name ?? $stockInObject->product_name;
+        $stockInObject->quantity = $request->quantity ?? $stockInObject->quantity;
+        $stockInObject->entry_date = $request->data_in ?? $stockInObject->entry_date;
+        $stockInObject->price =$request->price ?? $stockInObject->price;
+        $stockInObject->supplier = $request->supplier ?? $stockInObject->supplier;
+        if ($stockInObject->save()) {
+            return back()->with('message', 'Produto actualizado com sucesso');
+        }
+
+        return back()->with('message', 'Ocorreu um problema ao actualizar produto');
+    }
+
     public function deleteEntry( $id ) {
 
         if (Entry::findOrFail($id)->delete()) {

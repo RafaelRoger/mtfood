@@ -50,7 +50,8 @@
                                         <td>{{ __($entry->supplier ?? '-') }}</td>
                                         <td>{{ __($entry->entry_date) }}</td>
                                         <td>
-                                            <a href="">
+                                            <a href="" data-toggle="modal"
+                                                data-target="#updateModal{{ __($entry->id) }}">
                                                 <svg width="32" viewBox="0 0 24 24" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M13.7476 20.4428H21.0002" stroke="currentColor"
@@ -133,6 +134,58 @@
 </div>
 
 @foreach($entries as $entry)
+<div class="modal fade" id="updateModal{{ __($entry->id) }}" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Actualizar Produto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" action="{{ __(route('stock.in.update', $entry->id)) }}">
+                @csrf
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label class="form-label" for="name">Nome do produto:</label>
+                            <input type="text" class="form-control" value="{{ __($entry->product_name) }}" name="name"
+                                id="name" placeholder="Nome do produto" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="form-label" for="quantity">Quantidade:</label>
+                            <input type="text" class="form-control" value="{{ __($entry->quantity) }}" name="quantity"
+                                id="quantity" placeholder="Quantidade" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="form-label" for="data_in">Data de entrada:</label>
+                            <input type="date" class="form-control" value="{{ __($entry->entry_date) }}" name="data_in"
+                                id="data_in" placeholder="Data de entrada" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="form-label" for="price">Preço por unidade:</label>
+                            <input type="text" class="form-control" value="{{ __($entry->price) }}" name="price"
+                                id="price" placeholder="Preço por unidade" required>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label class="form-label" for="supplier">Fornecedor:</label>
+                            <input type="text" class="form-control" value="{{ __($entry->supplier) }}" name="supplier"
+                                id="supplier" placeholder="Fornecedor">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="deleteModal{{ __($entry->id) }}" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -169,8 +222,8 @@
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
         <div class="toast-body">
-            @if($errors->any() || session('message'))       
-                {{ __(session('message')) }}
+            @if($errors->any() || session('message'))
+            {{ __(session('message')) }}
             @endif
         </div>
     </div>

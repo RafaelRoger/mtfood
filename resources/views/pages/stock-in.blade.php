@@ -30,27 +30,27 @@
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label class="form-label" for="name">Nome do produto:</label>
-                                        <input type="text" class="form-control" name="name" id="name"
+                                        <input type="text" class="form-control" name="name" :value="old('name')" id="name"
                                             placeholder="Nome do produto" required>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label class="form-label" for="quantity">Quantidade:</label>
-                                        <input type="text" class="form-control" name="quantity" id="quantity"
+                                        <input type="text" class="form-control" :value="old('quantity')" name="quantity" id="quantity"
                                             placeholder="Quantidade" required>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label class="form-label" for="data_in">Data de entrada:</label>
-                                        <input type="date" class="form-control" name="data_in" id="data_in"
+                                        <input type="date" class="form-control" :value="old('data_in')" name="data_in" id="data_in"
                                             placeholder="Data de entrada" required>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label class="form-label" for="price">Preço por unidade:</label>
-                                        <input type="text" class="form-control" name="price" id="price"
+                                        <input type="text" class="form-control" :value="old('price')" name="price" id="price"
                                             placeholder="Preço por unidade" required>
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label class="form-label" for="supplier">Fornecedor:</label>
-                                        <input type="text" class="form-control" name="supplier" id="supplier"
+                                        <input type="text" class="form-control" :value="old('supplier')" name="supplier" id="supplier"
                                             placeholder="Fornecedor">
                                     </div>
                                 </div>
