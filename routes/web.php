@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Dashboard;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -16,17 +17,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Route::prefix('admin')->group(function () {
+
     Route::controller(Dashboard::class)->group(function () {
         Route::get('dashboard', 'index')->name('dashboard');
     });
 
     Route::controller(UserController::class)->group(function () {
         Route::get('add-new-user', 'index')->name('user.add');
+        Route::post('add-new-user', 'store')->name('user.add');
         Route::get('list-users', 'show')->name('user.list');
     });
 
@@ -40,4 +41,9 @@ Route::prefix('admin')->group(function () {
         Route::get('stock-in-view', 'stockInView')->name('stock.in.view');
         Route::get('stock-out-view', 'stockOutView')->name('stock.out.view');
     });
+
+    Route::controller(ReportController::class)->group( function () {
+        Route::get('report/{param}', 'reportView')->name('report.view');
+    });
+
 });

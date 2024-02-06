@@ -17,7 +17,8 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Vilma',
             'email' =>'vilma@mtfood.com',
-            'password' => Hash::make('123456789')
+            'password' => Hash::make('123456789'),
+            'level' => '1'
         ]);
     }
 }
