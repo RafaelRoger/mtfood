@@ -63,4 +63,8 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function nivel() {
+        return $this->belongsTo(Level::class, 'level');
+    }
 }

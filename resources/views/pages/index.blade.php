@@ -5,8 +5,9 @@
    <div class="row">
       <div class="d-flex justify-content-between">
          <div>
-            <h2 class="text-primary fw-bold mb-3">Boa noite Rafael</h2>
-            <p>seja bem vindo a Bazuca</p>
+            <h2 class="text-primary fw-bold mb-3"><span id="greetings">Boa noite</span>{{ __(Auth::user()->name.'
+               '.Auth::user()->last_name) }}</h2>
+            <p>seja bem vindo(a) a MtFood</p>
          </div>
       </div>
       <div class="col-lg-12 mt-3">
@@ -33,7 +34,7 @@
                <span class="banner-text">BAZUCA</span>
                <div class="banner-item py-5">
                   <div class="banner-text-1">
-                     <h1 class="fw-bold mb-4">Sistema de 
+                     <h1 class="fw-bold mb-4">Sistema de
                         <span class="text-primary">Gestão de stock</span><br />
                      </h1>
                   </div>
@@ -83,7 +84,7 @@
                   <div class="row">
                      <div class="col-9">
                         <div class="d-flex align-items-center align-self-start">
-                           <h3 class="mb-0">1254</h3>
+                           <h3 class="mb-0">{{ __($entries) }}</h3>
                         </div>
                      </div>
                      <div class="col-3">
@@ -102,7 +103,7 @@
                   <div class="row">
                      <div class="col-9">
                         <div class="d-flex align-items-center align-self-start">
-                           <h3 class="mb-0">548</h3>
+                           <h3 class="mb-0">{{ __($outlets) }}</h3>
                         </div>
                      </div>
                      <div class="col-3">
@@ -121,7 +122,7 @@
                   <div class="row">
                      <div class="col-9">
                         <div class="d-flex align-items-center align-self-start">
-                           <h3 class="mb-0">10</h3>
+                           <h3 class="mb-0">{{ __($users) }}</h3>
                         </div>
                      </div>
                      <div class="col-3">
@@ -140,7 +141,7 @@
                   <div class="row">
                      <div class="col-9">
                         <div class="d-flex align-items-center align-self-start">
-                           <h3 class="mb-0">31.53 </h3>
+                           <h3 class="mb-0">{{ __($totalPrice) }}</h3>
                         </div>
                      </div>
                      <div class="col-3">
@@ -157,4 +158,16 @@
    </div>
 
 </div>
+
+<script>
+   const horaAtual = new Date().getHours();
+   const greetings = document.getElementById('greetings');
+   if (horaAtual >= 5 && horaAtual < 12) {
+      greetings.innerHTML = "Bom dia ";
+   } else if (horaAtual >= 12 && horaAtual < 18) {
+      greetings.innerHTML = "Boa tarde ";
+   } else {
+      greetings.innerHTML = "Boa noite ";
+   }
+</script>
 @endSection

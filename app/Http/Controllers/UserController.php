@@ -50,6 +50,10 @@ class UserController extends Controller
     }
 
     public function show() {
-        return view('pages.user-list');
+        $users = User::with('nivel')->get();
+
+        return view('pages.user-list', [
+            'users' => $users
+        ]);
     }
 }

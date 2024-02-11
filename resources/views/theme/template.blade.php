@@ -459,8 +459,7 @@
                                     <img src="{{ url('assets/images/avatars/01.png') }}" alt="User-Profile"
                                         class="img-fluid avatar avatar-50 avatar-rounded">
                                     <div class="caption ms-3 ">
-                                        <h6 class="mb-0 caption-title">Rafael Munguambe</h6>
-                                        <p class="mb-0 caption-sub-title">Super Admin</p>
+                                        <h6 class="mb-0 caption-title">{{ __(Auth::user()->name.' '.Auth::user()->last_name) }}</h6>
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -525,6 +524,24 @@
     <script src="{{ url('assets/js/charts/apexcharts.js') }}"></script>
     <!-- countdown JavaScript -->
     <script src="{{ url('assets/js/countdown.js') }}"></script>
+    <script src="{{ url('vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ url('vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ url('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ url('vendor/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ url('vendor/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ url('vendor/pdfmake/pdfmake.min.js') }}"></script>
+    <script src="{{ url('vendor/pdfmake/vfs_fonts.js') }}"></script>
+    <script src="{{ url('vendor/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["csv", "excel", "pdf", "print"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        });
+    </script>
 </body>
 
 </html>
