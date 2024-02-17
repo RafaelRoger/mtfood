@@ -31,6 +31,11 @@ class AuthController extends Controller
         if (Auth::attempt($credentials, ($request->get('remember') == 'on') ? true : false)) {
             return redirect()->intended(route('dashboard'));
         }
-        return redirect()->back()->with('message', 'Email ou Senha incorretos');
+        return redirect()->back()->withErrors('Email ou Senha incorretos');
+    }
+
+    public function logout() {
+        Auth::logout();
+        return redirect()->route('auth.login');
     }
 }

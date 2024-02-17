@@ -31,6 +31,9 @@ Route::prefix('admin')->group(function () {
             Route::get('add-new-user', 'index')->name('user.add');
             Route::post('add-new-user', 'store')->name('user.add');
             Route::get('list-users', 'show')->name('user.list');
+            Route::get('delete-user/{id}', 'delete')->name('user.delete');
+            Route::get('update-user/{id}', 'invokeUpdateTemplate')->name('user.update');
+            Route::post('update-user/{id}', 'update')->name('user.update');
         });
 
         Route::controller(StockController::class)->group(function () {
@@ -46,6 +49,10 @@ Route::prefix('admin')->group(function () {
 
         Route::controller(ReportController::class)->group(function () {
             Route::get('report/{param}', 'reportView')->name('report.view');
+        });
+
+        Route::controller(AuthController::class)->group( function () {
+            Route::get('logout', 'logout')->name('admin.logout');
         });
     });
 });

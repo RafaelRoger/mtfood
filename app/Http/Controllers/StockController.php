@@ -10,10 +10,16 @@ class StockController extends Controller
 {
     
     public function indexStockIn() {
+
+        // AUTHORIZATION
+        $this->authorize('admin');
+        
         return view('pages.stock-in');
     }
 
     public function storeStockIn( Request $request ) {
+        // AUTHORIZATION
+        $this->authorize('admin');
 
         $request->validate([
             'name'     => 'required',
