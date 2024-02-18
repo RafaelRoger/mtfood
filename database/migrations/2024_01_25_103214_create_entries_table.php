@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('entries', function (Blueprint $table) {
             $table->id();
             $table->string('product_name');
-            $table->integer('quantity');
+            $table->unsignedInteger('quantity');
             $table->date('entry_date');
             $table->double('price');
             $table->string('supplier')->nullable();

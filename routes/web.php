@@ -42,9 +42,17 @@ Route::prefix('admin')->group(function () {
             Route::post('stock-in-update/{id}', 'updateProduct')->name('stock.in.update');
             Route::get('stock-in-delete/{id}', 'deleteEntry')->name('stock.in.delete');
             Route::get('stock-out', 'indexStockOut')->name('stock.out');
-            Route::post('stock-out', 'deduce')->name('stock.out');
+            Route::get('stock-out-deduce', 'deduce')->name('stock.out.deduce');
+
+            Route::post('add-on-stock-out-list', 'addOnList')->name('stock.out.add');
+            Route::get('empty-list', 'emptyList')->name('stock.out.empty-list');
+            Route::get('remove-product-list/{id}', 'removeProduct')->name('stock.out.remove-product');
+
             Route::get('stock-in-view', 'stockInView')->name('stock.in.view');
             Route::get('stock-out-view', 'stockOutView')->name('stock.out.view');
+
+            Route::get('invoice', 'invoice')->name('admin.invoice');
+            Route::get('download/{id}', 'downloadInvoice')->name('admin.download-invoice');
         });
 
         Route::controller(ReportController::class)->group(function () {

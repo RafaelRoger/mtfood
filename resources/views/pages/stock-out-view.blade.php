@@ -22,6 +22,7 @@
                                         <th>Preço total de saída</th>
                                         <th>Fornecedor</th>
                                         <th>Data de saída</th>
+                                        <th>Ação</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -31,10 +32,13 @@
                                         <td>{{ __($outlet->entry->product_name) }}</td>
                                         <td>{{ __($outlet->quantity) }}</td>
                                         <td>{{ __($outlet->leftover) }}</td>
-                                        <td>{{ __($outlet->entry->price) }}</td>
-                                        <td>{{ __($outlet->quantity * $outlet->entry->price) }}</td>
+                                        <td>{{ __($outlet->entry->price) }}MT</td>
+                                        <td>{{ __($outlet->quantity * $outlet->entry->price) }}MT</td>
                                         <td>{{ __($outlet->entry->supplier ?? '-') }}</td>
                                         <td>{{ __($outlet->entry->entry_date) }}</td>
+                                        <td>
+                                        <a href="{{ __(route('admin.download-invoice', $outlet->id)) }}" class="btn btn-success">Baixar</a>
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
