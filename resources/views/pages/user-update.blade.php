@@ -1,5 +1,5 @@
 @extends('theme.template')
-@section('title', 'Bazuca | Adicione um novo Utilizador')
+@section('title', 'MT Food | Actualizar Utilizador')
 @section('content')
 <div class="container-fluid content-inner pb-0">
     <form method="post" action="{{ __(route('user.update', $user->id)) }}">

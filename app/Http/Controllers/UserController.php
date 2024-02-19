@@ -68,9 +68,10 @@ class UserController extends Controller
     }
 
     public function invokeUpdateTemplate( $id ) {
-        $this->authorize('admin');
 
         $user = User::findOrFail( $id );
+        $this->authorize('user.edit', $user);
+
         $levels = Level::get();
 
         return view('pages.user-update', [
@@ -81,7 +82,8 @@ class UserController extends Controller
 
     public function update( Request $request, $id ) {
         // AUTHORIZATION
-        $this->authorize('admin');
+        $user = User::findOrFail($id);
+        $this->authorize('user.edit', $user);
 
         $request->validate([
             'name' => 'required|string|max:250',
@@ -93,8 +95,6 @@ class UserController extends Controller
         if ($request->hasFile('profile_photo')) {
             $dir = $request->file('profile_photo')->store('img');
         }
-
-        $user = User::findOrFail($id);
 
         if (!empty($request->old_password) || !empty($request->new_password)) {
             if (password_verify($request->old_password, $user->password)) 

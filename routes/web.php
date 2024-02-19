@@ -44,6 +44,9 @@ Route::prefix('admin')->group(function () {
             Route::get('stock-out', 'indexStockOut')->name('stock.out');
             Route::get('stock-out-deduce', 'deduce')->name('stock.out.deduce');
 
+            Route::get('sold-out', 'soldOut')->name('soldout');
+            Route::post('sold-out/{id}', 'addQuantity')->name('soldout.add');
+
             Route::post('add-on-stock-out-list', 'addOnList')->name('stock.out.add');
             Route::get('empty-list', 'emptyList')->name('stock.out.empty-list');
             Route::get('remove-product-list/{id}', 'removeProduct')->name('stock.out.remove-product');
@@ -69,8 +72,8 @@ Route::controller(AuthController::class)->group(function () {
     Route::middleware('guest')->group(function () {
         Route::get('/', 'index')->name('auth.login');
         Route::post('/', 'auth')->name('auth.login');
-        Route::get('/login', 'index')->name('auth.login2');
-        Route::post('/login', 'index')->name('auth.login2');
+        Route::get('/login', 'index')->name('login');
+        Route::post('/login', 'index')->name('login');
         Route::get('/register', 'index')->name('auth.register');
         Route::post('/register', 'index')->name('auth.register');
     });

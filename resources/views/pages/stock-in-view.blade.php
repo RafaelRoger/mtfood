@@ -1,5 +1,5 @@
 @extends('theme.template')
-@section('title', 'Bazuca | Visualizar produtos')
+@section('title', 'MT Food | Lista de produtos')
 @section('content')
 <div class="container-fluid content-inner pb-0">
     <div>

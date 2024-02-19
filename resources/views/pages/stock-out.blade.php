@@ -1,5 +1,5 @@
 @extends('theme.template')
-@section('title', 'Bazuca | Realizar saida de produtos')
+@section('title', 'MT Food | Realizar saida de produtos')
 @section('content')
 <div class="container-fluid content-inner pb-0">
     <div>
@@ -8,7 +8,7 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
-                            <h4 class="card-title">Entrada de novos produtos</h4>
+                            <h4 class="card-title">Saída de produtos</h4>
                         </div>
                     </div>
                     <div class="card-body">

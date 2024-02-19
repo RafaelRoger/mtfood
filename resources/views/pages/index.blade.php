@@ -1,5 +1,5 @@
 @extends('theme.template')
-@section('title', 'Bazuca | Dashboard')
+@section('title', 'MT Food | Dashboard')
 @section('content')
 <div class="container-fluid content-inner pb-0">
    <div class="row">
@@ -31,7 +31,7 @@
                </button>
             </div>
             <div class="card-body banner-body">
-               <span class="banner-text">BAZUCA</span>
+               <span class="banner-text">MTFOOD</span>
                <div class="banner-item py-5">
                   <div class="banner-text-1">
                      <h1 class="fw-bold mb-4">Sistema de

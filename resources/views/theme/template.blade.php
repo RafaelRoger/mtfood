@@ -75,7 +75,7 @@
                                         stroke-linejoin="round"></path>
                                 </svg>
                             </i>
-                            <span class="item-name">Users</span>
+                            <span class="item-name">Utilizadores</span>
                             <i class="right-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none" viewBox="0 0 24 24"
                                     stroke="currentColor">
@@ -116,7 +116,7 @@
                             </li>
                         </ul>
                     </li>
-                    
+
                     <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-stock" role="button"
                             aria-expanded="false" aria-controls="sidebar-stock">
@@ -223,7 +223,18 @@
                             </li>
                         </ul>
                     </li>
-
+                    <li class="nav-item">
+                        <a class="nav-link " aria-current="page" href="{{ __(route('soldout')) }}">
+                            <i class="icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-basket3" viewBox="0 0 16 16">
+                                    <path
+                                        d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6h1.717L5.07 1.243a.5.5 0 0 1 .686-.172zM3.394 15l-1.48-6h-.97l1.525 6.426a.75.75 0 0 0 .729.574h9.606a.75.75 0 0 0 .73-.574L15.056 9h-.972l-1.479 6z" />
+                                </svg>
+                            </i>
+                            <span class="item-name">Produtos esgotados</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -263,19 +274,20 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto navbar-list mb-2 mb-lg-0 align-items-center">
-                            
+
                             <li class="nav-item dropdown">
                                 <a class="nav-link py-0 d-flex align-items-center" href="#" id="navbarDropdown"
                                     role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src="{{ url('assets/images/avatars/01.png') }}" alt="User-Profile"
                                         class="img-fluid avatar avatar-50 avatar-rounded">
                                     <div class="caption ms-3 ">
-                                        <h6 class="mb-0 caption-title">{{ __(Auth::user()->name.' '.Auth::user()->last_name) }}</h6>
+                                        <h6 class="mb-0 caption-title">{{ __(Auth::user()->name.'
+                                            '.Auth::user()->last_name) }}</h6>
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <li class="border-0"><a class="dropdown-item"
-                                            href="dashboard/app/user-profile.html">Profile</a></li>
+                                            href="{{ __(route('user.update', Auth::user()->id)) }}">Profile</a></li>
                                     <li class="border-0">
                                         <hr class="m-0 dropdown-divider">
                                     </li>
@@ -344,14 +356,14 @@
     <script src="{{ url('vendor/pdfmake/vfs_fonts.js') }}"></script>
     <script src="{{ url('vendor/datatables-buttons/js/buttons.html5.min.js') }}"></script>
     <script>
-        $(function () {
-            $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "buttons": ["csv", "excel", "pdf", "print"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        });
+    $(function () {
+        $("#example1").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "buttons": ["csv", "excel", "pdf", "print"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    });
     </script>
 </body>
 

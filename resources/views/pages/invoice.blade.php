@@ -1,5 +1,5 @@
 @extends('theme.template')
-@section('title', 'Bazuca | Visualizar produtos removidos do stock')
+@section('title', 'MT Food | Invoice')
 @section('content')
 
 <div class="card">

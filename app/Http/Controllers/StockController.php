@@ -91,6 +91,30 @@ class StockController extends Controller
         return back()->with('message', 'Ocorreu um problema ao excluir produto');
     }
 
+    public function soldOut() {
+        $entries = Entry::where('quantity', 0)->get();
+
+        return view('pages.sold-out', [
+            'entries' => $entries
+        ]);
+    }
+
+    public function addQuantity( Request $request, $id ) {
+
+        $this->authorize('admin');
+
+        $request->validate([
+            'quantity' => 'required|numeric'
+        ]);
+
+        $entry = Entry::findOrFail($id);
+
+        $entry->quantity = $request->quantity + $entry->quantity;
+        $entry->save();
+
+        return redirect()->back()->with('message', 'Quantidades adicionadas com sucesso.');
+    }
+
     public function indexStockOut()
     {
         $entries = Entry::where('quantity', '>', 0)->get();
